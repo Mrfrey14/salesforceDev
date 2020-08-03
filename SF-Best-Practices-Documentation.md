@@ -1,7 +1,12 @@
-By: Matt Gerry
-This document will outline the standards and best practices our team uses. These are in addition to the typical [Salesforce best practices.](https://developer.salesforce.com/blogs/developer-relations/2015/01/apex-best-practices-15-apex-commandments.html)
+Written By: Matt Gerry
 
-It is also suggested you read the following book: [Apex Best Practices](https://www.amazon.com/Advanced-Apex-Programming-Salesforce-Appleman/dp/1936754126/ref=pd_sbs_14_1/134-8572035-4729812?_encoding=UTF8&pd_rd_i=1936754126&pd_rd_r=e091eb23-daa8-4013-9c17-a9c2678b783c&pd_rd_w=qma8j&pd_rd_wg=r0cF6&pf_rd_p=52b7592c-2dc9-4ac6-84d4-4bda6360045e&pf_rd_r=02MZS6R5D27AGW8EEC0T&psc=1&refRID=02MZS6R5D27AGW8EEC0T)
+This document will outline the standards and best practices I have found to be most useful throughout my time as a SF developer. These are in addition to the typical [Salesforce best practices.](https://developer.salesforce.com/blogs/developer-relations/2015/01/apex-best-practices-15-apex-commandments.html)
+
+I highly suggest you read the following books: 
+
+[Advanced Apex Programming](https://www.amazon.com/Advanced-Apex-Programming-Salesforce-Appleman/dp/1936754126/ref=pd_sbs_14_1/134-8572035-4729812?_encoding=UTF8&pd_rd_i=1936754126&pd_rd_r=e091eb23-daa8-4013-9c17-a9c2678b783c&pd_rd_w=qma8j&pd_rd_wg=r0cF6&pf_rd_p=52b7592c-2dc9-4ac6-84d4-4bda6360045e&pf_rd_r=02MZS6R5D27AGW8EEC0T&psc=1&refRID=02MZS6R5D27AGW8EEC0T)
+
+[Salesforce Lightning Platform Enterprise Architecture - Third Edition](https://www.amazon.com/Salesforce-Lightning-Platform-Enterprise-Architecture/dp/1789956714)
 
 
 
@@ -12,9 +17,11 @@ Naming Conventions
 
 All conventions outlined below apply to both apex and javascript. Please ensure your javascript follows all these conventions as well.
 
-###_<u>Class file naming</u>_
+### _<u>Class file naming</u>_
 
-- Prefix class files with appropriate business namespaces: CRM_, PDAPP_, etc. to make it easier to identify code for a particular business area.
+- Prefix classes with business unit specific logic with appropriate business unit namespaces: BusinessUnit_ClassName. to make it easier to identify code for a particular business unit.
+
+- Prefix classes that are to be utilized as utility classes org wide (without respect to any particular business unit) with the word Util: Util_ClassName. This makes it easier to identify utilities that can be leveraged by everyone working in the org and helps reduce code duplication.
 
 - Use camel case for class names. All words in a class name should be capitalized.
 
@@ -23,11 +30,11 @@ All conventions outlined below apply to both apex and javascript. Please ensure 
 - Class names **MUST BE MEANINGFUL!** Please ensure the name of your class is relevant to the class and what its purpose is.
 
 ```
-Care_CaseContactUpdater
-Care_CaseContactUpdater_Test
+BusinessUnit_MeaningfulClassName
+BusinessUnit_MeaningfulClassName_Test
 ```
 
-###_<u>Method naming conventions</u>_
+### _<u>Method naming conventions</u>_
 
 Methods should utilize camel case conventions. The first word in the method should be lower case, all other uppercase. Method names **MUST BE MEANINGFUL**. They must be named something relevant to the operation they are attempting to execute.
 
@@ -39,7 +46,7 @@ public void methodName(String acctName)
 
 ```
 
-###_<u>Variable naming conventions</u>_
+### _<u>Variable naming conventions</u>_
 
 Variables should utilize camel case conventions. The first word in the variable should be lower case, all other uppercase. Variable names **MUST BE MEANINGFUL** they should never be a single character or named something not relevant.
 
@@ -56,7 +63,7 @@ Code Formatting
 
 All of the below applies to both apex and javascript.
 
-###_<u>Brackets<u>_
+### _<u>Brackets<u>_
 Always place brackets on their own lines, never place them on the same line. It allows the code to be more readable and for bracket related issues to be easily resolved in any IDE.
 
 Also, **PLEASE WRAP ALL IF STATEMENTS IN BRACKETS!** I know that this is not always necessary but from a readability and debugging stand point it makes things ten times easier. Please always use brackets for if statements.
@@ -82,48 +89,48 @@ if(needsABracket)
 
 }
 ```
-###_<u>If Statements or Switch Statements or Ternary Operators<u>_
+### _<u>If Statements or Switch Statements or Ternary Operators?<u>_
 
 Please opt to use if statements over ternary operators. I know ternary operators are simpler to write, but they make code very difficult to read. If statements are very readable even for junior developers where as ternary operators can confuse many developers and take longer to read.
 
-I also prefer if statements over switch statements, but I will accept switch statements. I believe if statements are still much more readable.
+I also prefer if statements over switch statements. I believe if statements are still much more readable.
 
 ```java
 
-Boolean isGC = null;
+Boolean shouldBeChecked = null;
 
 //If else example.
 //More lines, but very readable
-if(storeType == 'GoldCrown')
+if(checkIt == 'yea')
 {
-   isGC = true;
+   shouldBeChecked = true;
 }
 else
 {
-    isGC = false;
+    shouldBeChecked = false;
 }
 
 //Switch statement example
 //Readable but less intuitive in my opinion.
-switch on storeType
+switch on checkIt
 {
-    when 'GoldCrown'
+    when 'yea'
     {
-        isGC = true;
+        shouldBeChecked = true;
     }
     else
     {
-        isGC = false;
+        shouldBeChecked = false;
     }
 }
 
 //Ternary operator example.
 //One line but very confusing.
-isGC = storeType == 'GoldCrown' ? true : false;
+shouldBeChecked = checkIt == 'yea' ? true : false;
 
 ```
 
-###_<u>Space or Tabs<u>_
+### _<u>Space or Tabs<u>_
 
 All of the below applies to both apex and javascript.
 
@@ -133,23 +140,32 @@ You had better use tabs dawg. If you use spaces you will not be forgiven. If you
 
 _**Comments**_
 
-- ###_Class Comment block_
-At the top of each class create a comment block that notes the developer name, date and a short description of what the class does, why it was made and where it may be referenced elsewhere in the code. Also be sure to include your JIRA ticket number. If it is the controller for an aura component, vf page or LWC you should state what the component it is a controller for. Your email will note your last name, where you work and provide a contact all at the same time.
+- ### _Always Use ApexDocs Comment Formatting_
+
+[ApexDocs](https://github.com/cesarParra/apexdocs) is a wonderful thing. If it's utilized appropriately you will always have exceptional code documentation and it can all be generated automatically. Please make sure all of your code comments follow the ApexDocs format so that you can auto generate markdown files for wiki documentation for our codebase.
+
+- ### _Class Comment block_
+At the top of each class create a comment block that notes the developer name (your email), date and a short description of what the class does, why it was made and where it may be referenced elsewhere in the code. Also be sure to include your JIRA ticket number in the description. If it is the controller for an aura component, vf page or LWC you should state what component it is a controller for.
 ```java
-/*
- * Written by matthew.e.gerry@tangocentral.com
- * JIRA Ticket #4444
- * Date Created: 10/23/2019
- * Description: Explains coding standards and best practices
+/**
+ * @author matt.gerry@tangocentral.com
+ * @date 10/23/2019
+ * @description Explains coding standards and best practices. JIRA Ticket: #4444
  */
 ```
 
-- ###_Method comments_
+- ### _Method comments_
 Above every method there should be a description as to what it does and how it is utilized. It should also contain useful comments about the method. Comments should inform the developers as to why something was coded the way it was and the business justifications for it.
 
 ```java
-//This method is utilized to determine whether the user has access to the HVO/Multi-Account Cart //they are viewing based on their territory membership
-public boolean multiAccountAccess(cchvo__hvoOrderGroup__c orderGroup)
+/**
+ * @description A description of the method.
+ * @param exampleVariable Information about the variable we pass to the method.
+ * @return What return do we get from this method and why.
+ * @example
+ * Boolean exampleBoolean = ExampleClass.exampleMethod('exampleString');
+ */
+public static Boolean exampleMethod(String exampleVariable)
 {
     //Logic and code comments to help understand the business reasoning behind the development
     //choices that were made.
@@ -165,7 +181,7 @@ _**CODE COMMENTS ARE EXTREMELY IMPORTANT!! CODE WILL NOT PASS REVIEWS WITHOUT TH
 HTML Guidelines and Formatting
 </h1>
 
-###_<u>Formatting<u>_
+### _<u>Formatting<u>_
 
 HTML formatting should be done in a similar format to how apex indentation is done to improve readability. The code commenting should be the same as apex or javascript.
 
@@ -190,13 +206,13 @@ HTML formatting should be done in a similar format to how apex indentation is do
 </html>
 ```
 
-###_<u>Javascript<u>_
+### _<u>Javascript<u>_
 
 - If the javascript is not contained in an Aura Component or an LWC, Javascript should be housed in its own static resource file and referenced in the visualforce page.
 
 - Javascript should be formatted and commented using the exact same standards as outlined above for apex.
 
-###_<u>CSS<u>_
+### _<u>CSS<u>_
 
 - CSS should always be housed in its own stylesheet file and referenced in the vf page or Aura component or LWC.
 
@@ -208,7 +224,7 @@ HTML formatting should be done in a similar format to how apex indentation is do
 Test Classes
 </h1>
 
-###_<u>Test method best practices</u>_
+### _<u>Test method best practices</u>_
 - Use testMethod modifier on test methods instead of @isTest above the method signature
 - Put the test setup as the first method in the test class before all test methods
 - Create a test method for every class method no matter what, even if one method will call to -
@@ -280,7 +296,7 @@ Triggers should never house any real logic. Their logic should reside in handler
 
 **_THERE SHOULD NEVER BE MORE THAN ONE TRIGGER PER OBJECT!!!!_**
 
-###_<u>Trigger Structure</u>_
+### _<u>Trigger Structure</u>_
 
 Triggers operate in two contexts; before and after. To ensure we have a clearer understanding of which context a trigger is firing in, wrap before trigger logic in a trigger.isBefore check and wrap after trigger logic in a trigger.isAfter check. There should also, preferably be a debug statement inside each of these to determine which context block is firing and when.
 
@@ -331,7 +347,7 @@ if(trigger.isAfter)
 
 ```
 
-###_<u>Trigger Recursion</u>_
+### _<u>Trigger Recursion</u>_
 _**TRIGGERS SHOULD NEVER REQUIRE RECURSION**_
 If your trigger requires recursion, you have designed your implementation wrong, there is never a need for recursion to happen within a trigger and can have detrimental effects on the environment as a whole.
 
@@ -384,7 +400,7 @@ trigger ObjectName_Trigger on Object (dml operations)
 
 ```
 
-###_<u>Trigger Switches</u>_
+### _<u>Trigger Switches</u>_
 
 To ensure we have an easy way to turn our triggers on and off in production in the event of a large data import or an emergency we have implemented a custom setting called trigger switches. These trigger switches allow us to switch our triggers off declaratively without having to redeploy them from a lower environment. **_All triggers should have a trigger switch made for them._** You can create a new trigger switch variable by going to Setup -> Custom Settings ->Trigger Switches -> Create new field
 
@@ -482,7 +498,7 @@ Process Builders
 
 Process builders are much like triggers in that there should typically only ever be one of them, however on occasion there can be a maximum of two per object. _**DO NOT MAKE MORE THAN ONE PROCESS BUILDER FOR EACH OF THE TWO TYPES LISTED BELOW!**_ Having more than one for either type can cause unexpected consequences. Build supplemental process builder logic into an existing process builder.
 
-###_<u>Naming Conventions</u>_
+### _<u>Naming Conventions</u>_
 
 Process builders should be named as follows:
 
@@ -491,16 +507,16 @@ Insert/Update Process Builders: [ObjectName] - Record Update
 
 [ObjectName] should be replaced with the name of the object the process builder is on.
 
-###_<u>Insert Process Builders</u>_
+### _<u>Insert Process Builders</u>_
 The first of the two types of process builders is an insert process builder. These process builders are used when an object has actions that should be taken on it **ONLY** when an new record is created for it. So if you specify in the process builder "Only when a record is created" That would qualify as an insert process builder.
 
-###_<u>Insert/Update Process Builders</u>_
+### _<u>Insert/Update Process Builders</u>_
 The second and most common type of process builder is a process builder that operates on insert and on update. If you make a process builder with the "when a record is created or edited" criteria it would qualify as an Insert/Update process builder.
 
-###_<u>Terminating a Process Builder</u>_
+### _<u>Terminating a Process Builder</u>_
 In the event you would like entry criteria for a process builder to terminate all actions the process builder may take without taking any action on any records, please utilize the **_Process_Builder_Terminator_** apex class. Use an apex callout to call the Process_Builder_Terminator to end your process builder without doing anything at all.
 
-###_<u>Process Builder Switches</u>_
+### _<u>Process Builder Switches</u>_
 As we did with our triggers, process builders also have declarative switches made for them. There is a custom setting for them as well. **_Every object with a process builder should have a Process Builder Switch made for it._**. You do not make one switch per process builder, rather one switch per object that has one or more process builders. This allows us to turn off all process builders for an object quickly. To make a process builder switch go to Setup -> Custom Settings -> Process Builder Switches -> Create new field.
 
 Once you have a switch made for your process builder object, make sure to implement a check to ensure the switch is on in the first node of the process builder. If the switch is not on, terminate the process builder using the apex class Process_Builder_Terminator.
@@ -523,7 +539,7 @@ Aside from time based event firing, there is really no need to utilize these muc
 Error Logging
 </h1>
 
-###_<u>How to utilize the custom Error Log Table:<u>_
+### _<u>How to utilize the custom Error Log Table:<u>_
 
 _**ALL CODE MUST UTILIZE THE ERROR LOGGING TABLE!!**_ This custom error logging table allows us greater insight into the errors that occur, when they occurred and who they occurred for. The error logging should be implemented in both the view and controller (view could be the aura component, LWC or VF Page). You should call the Universal_Error_Logger apex class to insert these error logs.
 
@@ -632,7 +648,7 @@ exampleMethod : function(component, event, helper)
 Security
 </h1>
 
-###_<u>Apex With Sharing</u>_
+### _<u>Apex With Sharing</u>_
 
 Aside from very specific use cases, please do your best to always utilize the "with sharing keyword in your apex classes to ensure that the internal sharing rules for the user currently running the code are enforced.
 
@@ -644,7 +660,7 @@ public with sharing class exampleClass
 }
 ```
 
-###_<u>Using the sObject Describe Class for increased security:</u>_
+### _<u>Using the sObject Describe Class for increased security:</u>_
 
 In practice I find this is really only necessary in several situations.
 
