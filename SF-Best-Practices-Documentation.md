@@ -188,7 +188,7 @@ HTML formatting should be done in a similar format to how apex indentation is do
 
 ```html
 <!--
-     Written By: Matt.Gerry@Hallmark.com
+     Written By: Matt.Gerry@tacotastic.com
      JIRA Ticket #4444
      Date: 11/4/2019
      Description: Example html tab indentations
@@ -208,7 +208,7 @@ HTML formatting should be done in a similar format to how apex indentation is do
 
 ### _<u>Javascript<u>_
 
-- If the javascript is not contained in an Aura Component or an LWC, Javascript should be housed in its own static resource file and referenced in the visualforce page.
+- If the javascript is not contained in an Aura Component or an LWC, Javascript should be housed in its own static resource file and added to the code via a script tag.
 
 - Javascript should be formatted and commented using the exact same standards as outlined above for apex.
 
@@ -225,13 +225,15 @@ Test Classes
 </h1>
 
 ### _<u>Test method best practices</u>_
-- Use testMethod modifier on test methods instead of @isTest above the method signature
-- Put the test setup as the first method in the test class before all test methods
-- Create a test method for every class method no matter what, even if one method will call to -
+- Use testMethod modifier on test methods instead of @isTest above the method signature. It looks quite a bit cleaner.
+- Put the test setup method as the first method in the test class before all test methods. Also, always utilize @TestSetup methods for setting up test data.
+- Create a test method for every class method no matter what, even if one method will call to
   another method and give you code coverage.
 - Always ensure every test method uses at least one assertion to make sure we are not only
   getting code coverage but that our apex classes are returning the results we expect them to
   return.
+- Make sure to test for both positive and negative scenarios in your test classes (scenarios that fail and scenarios that don't). 
+- Make sure to test bulk scenarios. Testing the creation of one contact in a contact trigger is not sufficient. Test how it handles a load of 10,000 contacts too.
 
 ```java
 //Test Class
@@ -264,14 +266,13 @@ List<User> rmdmUser = ObjectCreator.userCreator('MattyRMDM', 1, null, roleId);
     }
 }
 ```
-
-If you want an example of a perfect test class, please reference the CheckUserAccess_Test test class. It has comments explaining everything and is formatted according to our test class best practices.
-
 - Use the SetupData method to create test data, put it before test methods. Separate setup and non-setup object data to avoid mixed dml statement errors.
 
-- Always use our ObjectCreator to create test data.
+- Always use a data factory class to create test data, never build that in the class itself.
+
+- Make sure your data factory can create bulk amounts of data for testing, not just a single object at a time.
 ```
-ObjectCreator.userCreator ...
+TestDataFactory.createUsers() ...
 ```
 
 - Use start test and stop test. This will make sure that limits used by the data setup are not counted against the test. This resets and provides a separate set of limits for the test to use.
@@ -294,58 +295,18 @@ Triggers</h1>
 
 Triggers should never house any real logic. Their logic should reside in handler classes. This allows us to better handle issues with logic and identify where a problem resides.
 
+I suggest utilizing the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework). It's super light weight and more than enough for the vast majority of orgs.
+
 **_THERE SHOULD NEVER BE MORE THAN ONE TRIGGER PER OBJECT!!!!_**
 
 ### _<u>Trigger Structure</u>_
 
-Triggers operate in two contexts; before and after. To ensure we have a clearer understanding of which context a trigger is firing in, wrap before trigger logic in a trigger.isBefore check and wrap after trigger logic in a trigger.isAfter check. There should also, preferably be a debug statement inside each of these to determine which context block is firing and when.
+Triggers operate in the following way.
+1. They run Before operations, then after operations. Before and after operations occur within the same context.
+2. They always operate in chunks of 200 records. So if you send in a batch of 1000 contact updates at the same time, the trigger will fire 5 times. It fires once for every 200 records. This all occurs within the same context.
+3. Triggers are re-invoked on record update or record insert actions from flows, workflows and process builders. For this reason it is not ideal to have combined execution types. Either use triggers, flows, workflows or process builders. Combining them can really slow things down and is detrimental in larger orgs. If you do combine them, make sure nothing requires trigger recursion and build mechanisms to shut off the triggers when another process updates or inserts a record.
 
-```java
-if(trigger.isBefore)
-{
-    //before logic
-    System.debug('::: The before statement in triggerX is firing :::');
-}
-
-if(trigger.isAfter)
-{
-    //after logic
-    System.debug('::: The after statement in triggerX is firing :::');
-}
-```
-
-In a similar context, we should also separate out insert, update, delete and undelete logic as well. This helps us to simplify our handler classes and to ensure we know what is operating and when.
-
-```java
-if(trigger.isBefore)
-{
-    System.debug('::: The before statement in triggerX is firing :::');
-
-    if(trigger.isInsert)
-    {
-        // put before insert handler class callouts here
-    }
-    if(trigger.isUpdate)
-    {
-        //put before update handler class callouts here  
-    }
-}
-
-if(trigger.isAfter)
-{
-    System.debug('::: The after statement in triggerX is firing :::');
-
-    if(trigger.isInsert)
-    {
-        // put after insert handler class callouts here
-    }
-    if(trigger.isUpdate)
-    {
-        //put after update handler class callouts here  
-    }
-}
-
-```
+Please reference the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework) documentation to see how to appropriately structure your triggers and their handler classes.
 
 ### _<u>Trigger Recursion</u>_
 _**TRIGGERS SHOULD NEVER REQUIRE RECURSION**_
@@ -353,52 +314,10 @@ If your trigger requires recursion, you have designed your implementation wrong,
 
 That being said there are lots of things that can cause a trigger to re-fire such as a process builder updating or inserting a record or a workflow rule updating a record.
 
-To prevent workflows and process builders from recursively firing a trigger we should always implement static variables to prevent the recursion from taking place. In our org the static trigger variables are housed in the **StaticTriggerVariables** class. Please add static trigger variables to this class should you need them. Putting the variables in a separate class allows you to set them anywhere instead of just in that trigger. 
+To prevent workflows and process builders from recursively firing a trigger we should always implement a way to prevent the recursion from taking place. With the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework) you can utilize the bypass method to bypass your trigger when appropriate. 
 
-In the event you have a process builder or workflow on an object that is causing trigger recursion use the following to prevent it:
+In the event you have a process builder or workflow on an object that is causing trigger recursion use the apex utility classes provided on this github page to bypass the trigger execution.
 
-```java
-
-//static variable example
-public class StaticTriggerVariables
-{
-        //Add static variables to the StaticTriggerVariables class, one for each context (before
-        //and after) to give yourself more flexibility.
-        public static Boolean stopBeforeAccountTrigger = false;
-        public static Boolean stopAfterAccountTrigger = false;
-}
-
-//trigger example
-trigger ObjectName_Trigger on Object (dml operations)
-{
-    if(trigger.isBefore)
-    {
-        //Checking to see if we've run the before trigger within this operational context.
-        if(!StaticTriggerVariables.stopBeforeAccountTrigger)
-        {
-            //handler class callouts
-           
-            //this declaration will prevent the account triggers before statement from being
-            //called again within the same operating context
-            StaticTriggerVariables.stopBeforeAccountTrigger = true;
-        }
-    }
-
-    if(trigger.isAfter)
-    {
-        //Checking to see if we've run the after trigger within this operational context.
-        if(!StaticTriggerVariables.stopAfterAccountTrigger)
-        {
-            //handler class callouts
-
-            //this declaration will prevent the account triggers before statement from being
-            //called again within the same operating context
-            StaticTriggerVariables.stopAfterAccountTrigger = true;
-        }
-    }
-}
-
-```
 
 ### _<u>Trigger Switches</u>_
 
