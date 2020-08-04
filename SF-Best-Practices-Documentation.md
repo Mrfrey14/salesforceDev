@@ -144,6 +144,8 @@ _**Comments**_
 
 [ApexDocs](https://github.com/cesarParra/apexdocs) is a wonderful thing. If it's utilized appropriately you will always have exceptional code documentation and it can all be generated automatically. Please make sure all of your code comments follow the ApexDocs format so that you can auto generate markdown files for wiki documentation for our codebase.
 
+For information on how to easily install apexDocs please check out my wiki article here: [How to Install ApexDocs](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Get-ApexDocs-Running)
+
 - ### _Class Comment block_
 At the top of each class create a comment block that notes the developer name (your email), date and a short description of what the class does, why it was made and where it may be referenced elsewhere in the code. Also be sure to include your JIRA ticket number in the description. If it is the controller for an aura component, vf page or LWC you should state what component it is a controller for.
 ```java
