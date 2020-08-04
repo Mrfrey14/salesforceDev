@@ -139,6 +139,7 @@ You had better use tabs dawg. If you use spaces you will not be forgiven. If you
 <hr/>
 
 _**Comments**_
+
 As a general rule you should always comment your code. It's important to document the following things:
 1. Why the code was written in the first place. What were the business reasons behind it? What is the class/method actually made to do? Etc.
 2. To document complex code and why it has to be complex. Typically code is only complex because of inadequate architecture decisions resulting in loosely coupled data (or something similar to that). It still happens though and when it happens it's important to document that in the code.
