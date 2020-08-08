@@ -1,4 +1,11 @@
-_### In IntelliJ do the following steps:_
+
+***
+
+### Do the following steps to install ESLint for IntelliJ/Illuminated Cloud and Salesforce
+
+
+***
+
 
 1. Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing (this approach is a bit better imo): [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
 
