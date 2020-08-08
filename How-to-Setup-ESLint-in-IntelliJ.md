@@ -1,4 +1,4 @@
-In IntelliJ do the following steps:
+### In IntelliJ do the following steps:
 
 1. Open the Terminal Window
 
