@@ -1,6 +1,8 @@
-### In IntelliJ do the following steps:
+_### In IntelliJ do the following steps:_
 
-1. Open the Terminal Window
+1. Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing (this approach is a bit better imo): [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
+
+1. Open the Terminal Window in IntelliJ
 
 2. Run the command `npm init` 
     * Enter a meaningful name for your package and then press enter
@@ -50,5 +52,5 @@
     * Click the, "Configuration File" radio button and select the configuration that you have within your project [project path\.eslintrc.js]
     * Click the OK button
 
-
+8. ESLint should now be setup in IntelliJ and auto-detect problems in you JS files.
  
