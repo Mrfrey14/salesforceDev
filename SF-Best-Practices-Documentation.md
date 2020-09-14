@@ -326,92 +326,7 @@ In the event you have a process builder or workflow on an object that is causing
 
 
 ### _<u>Trigger Switches</u>_
-
-To ensure we have an easy way to turn our triggers on and off in production in the event of a large data import or an emergency we have implemented a custom setting called trigger switches. These trigger switches allow us to switch our triggers off declaratively without having to redeploy them from a lower environment. **_All triggers should have a trigger switch made for them._** You can create a new trigger switch variable by going to Setup -> Custom Settings ->Trigger Switches -> Create new field
-
-Once you have created the trigger switch, make sure to place code at the top of the trigger that effectively allows you to bypass the trigger if the trigger switch is unchecked.
-
-```java
-trigger AccountTrigger on Account (before insert, before update, after update, after insert)
-{
-    //DO NOT PUT ANY CODE ABOVE THIS LINE!!!!!
-    //Determining if the trigger has been turned off via the Trigger Switches Custom Setting
-    //Triggers should only be deactivated using the custom setting during large volume data
-    //loads.
-    Trigger_Switches__c isTriggerOn = Trigger_Switches__c.getOrgDefaults();
-    if(!isTriggerOn.AccountTrigger_Switch__c)
-    {
-        return;
-    }
-
-    //All other code goes below this statement.
-}
-```
-
-If we put all the above rules together we can infer that triggers should always be structured as follows:
-
-```java
-
-//The trigger should always be the name of the object with the post-fix _Trigger
-//trigger example
-trigger ObjectName_Trigger on Object (dml operations)
-{
-    //DO NOT PUT ANY CODE ABOVE THIS LINE!!!!!
-    //Determining if the trigger has been turned off via the Trigger Switches Custom Setting
-    //Triggers should only be deactivated using the custom setting during large volume data
-    //loads.
-    Trigger_Switches__c isTriggerOn = Trigger_Switches__c.getOrgDefaults();
-    if(!isTriggerOn.[Object]Trigger_Switch__c)
-    {
-        return;
-    }
-
-    if(trigger.isBefore)
-    {
-        //Checking to see if we've run the before trigger within this operational context.
-        if(!StaticTriggerVariables.stopBefore[Object]Trigger)
-        {
-            System.debug('::: The before statement in triggerX is firing :::');
-
-            if(trigger.isInsert)
-            {
-                // put before insert handler class callouts here
-            }
-            if(trigger.isUpdate)
-            {
-                //put before update handler class callouts here
-            }
-
-            //this declaration will prevent the account triggers before statement from being
-            //called again within the same operating context
-            StaticTriggerVariables.stopBefore[Object]Trigger = true;
-        }
-    }
-
-    if(trigger.isAfter)
-    {
-        //Checking to see if we've run the after trigger within this operational context.
-        if(!StaticTriggerVariables.stopAfter[Object]Trigger)
-        {
-            System.debug('::: The after statement in triggerX is firing :::');
-
-            if(trigger.isInsert)
-            {
-                // put after insert handler class callouts here
-            }
-            if(trigger.isUpdate)
-            {
-                //put after update handler class callouts here
-            }
-
-            //this declaration will prevent the account triggers before statement from being
-            //called again within the same operating context
-            StaticTriggerVariables.stopAfter[Object]Trigger = true;
-        }
-    }
-}
-
-```
+ - Needs to be updated.
 <br/>
 <hr/>
 <br/>
@@ -442,11 +357,7 @@ The second and most common type of process builder is a process builder that ope
 In the event you would like entry criteria for a process builder to terminate all actions the process builder may take without taking any action on any records, please utilize the **_Process_Builder_Terminator_** apex class. Use an apex callout to call the Process_Builder_Terminator to end your process builder without doing anything at all.
 
 ### _<u>Process Builder Switches</u>_
-As we did with our triggers, process builders also have declarative switches made for them. There is a custom setting for them as well. **_Every object with a process builder should have a Process Builder Switch made for it._**. You do not make one switch per process builder, rather one switch per object that has one or more process builders. This allows us to turn off all process builders for an object quickly. To make a process builder switch go to Setup -> Custom Settings -> Process Builder Switches -> Create new field.
-
-Once you have a switch made for your process builder object, make sure to implement a check to ensure the switch is on in the first node of the process builder. If the switch is not on, terminate the process builder using the apex class Process_Builder_Terminator.
-
-![PBDeclarativeSwitch.PNG](/.attachments/PBDeclarativeSwitch-d9ed0d44-e7eb-44f5-b480-c68cdb81bdf0.PNG)
+ - Needs to be updated
 
 <hr/>
 
