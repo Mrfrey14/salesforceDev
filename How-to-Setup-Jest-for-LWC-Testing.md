@@ -2,15 +2,17 @@ Install/Setup guide for Jest:
 
 1) Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing (this approach is a bit better imo): [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
 
-2) Install Jest CLI via the CLI using the command: npm install -g jest-cli (or npm install --save-dev jest-cli for a local project install)
+2) [Install Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable)
 
-3) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
+3) Install sfdx-lwc-jest via the CLI using the command: yarn add -D @salesforce/sfdx-lwc-jest
+
+4) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
     a) When prompted, type the value A and then hit enter
 
-4) Create a top level folder in your project called \_\_tests\_\_
+4) Create a folder inside your lightning web component (or Aura Component) folder called \_\_tests\_\_
 
 5) Create tests in that folder and name them [fileYouAreTesting].test.js
 
-6) Use the cli command jest --watch to have jest automatically run tests when they get updated 
+6) Use the cli command npm run test:unit:watch to have jest automatically run tests when they get updated 
 
 
