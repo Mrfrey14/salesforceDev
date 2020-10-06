@@ -11,4 +11,6 @@ Install/Setup guide for Jest:
 
 5) Create tests in that folder and name them [fileYouAreTesting].test.js
 
+6) Use the cli command jest --watch to have jest automatically run tests when they get updated 
+
 
