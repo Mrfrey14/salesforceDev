@@ -7,3 +7,8 @@ Install/Setup guide for Jest:
 3) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
     a) When prompted, type the value A and then hit enter
 
+4) Create a top level folder in your project called __tests__
+
+5) Create tests in that folder and name them [fileYouAreTesting].test.js
+
+
