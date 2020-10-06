@@ -17,6 +17,8 @@ Install/Setup guide for Jest:
 
 6) Create tests in the \_\_tests\_\_ folder and name them [fileYouAreTesting].test.js
 
-7) Use the cli command npm run test:unit:watch to have jest automatically run tests when they get updated 
+7) Use the cli command npm run test:unit to run tests inside your \_\_tests\_\_ folders
+
+       a) Use the command npm run test:unit:watch to have jest automatically run tests when they get updated. 
 
 [More info on sfdx-lwc-jest here](https://github.com/salesforce/sfdx-lwc-jest)
