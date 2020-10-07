@@ -16,7 +16,8 @@ Install/Setup guide for Jest:
         a) This can be automatically done by utilizing the sfdx force:lightning:lwc:test:create command
 
         b) If your javascript or the apex it calls does callouts to external systems, also make a folder 
-           called __mocks__ to put mock files/classes in
+           called __mocks__ to put mock files/classes in. You will need to add the glob pattern
+           **/__mocks__/** to your .forceignore file if you do this.
 
 6) Create tests in the \_\_tests\_\_ folder and name them [fileYouAreTesting].test.js
 
