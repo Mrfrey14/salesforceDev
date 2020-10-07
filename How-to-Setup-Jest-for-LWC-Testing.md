@@ -13,7 +13,7 @@ Install/Setup guide for Jest:
 
 4) Create a folder inside your lightning web component (or Aura Component) folder called \_\_tests\_\_
 
-        a) This can be automatically done by utilizing the sfdx [force:lightning:lwc:test:create](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm) command
+        a) This can be automatically done by utilizing the sfdx force:lightning:lwc:test:create command
 
         b) If your javascript or the apex it calls does callouts to external systems, also make a folder 
            called __mocks__ to put mock files/classes in
