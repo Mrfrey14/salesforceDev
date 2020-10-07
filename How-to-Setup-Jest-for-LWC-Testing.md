@@ -4,7 +4,8 @@ Install/Setup guide for Jest:
 
 2) run this command in your project to install jest for lwc: sfdx [force:lightning:lwc:test:setup](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm)
 
-        a) This command also adds the __tests__ folders to the .forceignore file which makes sure its not synced to the server.
+        a) This command also adds the __tests__ folders to the .forceignore file which 
+        makes sure its not synced to the server.
 
 3) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
 
@@ -14,7 +15,7 @@ Install/Setup guide for Jest:
 
         a) This can be automatically done by utilizing the sfdx [force:lightning:lwc:test:create](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm) command
 
-        a) If your javascript or the apex it calls does callouts to external systems, also make a folder 
+        b) If your javascript or the apex it calls does callouts to external systems, also make a folder 
            called __mocks__ to put mock files/classes in
 
 6) Create tests in the \_\_tests\_\_ folder and name them [fileYouAreTesting].test.js
