@@ -1,6 +1,6 @@
 Install/Setup guide for Jest:
 
-1) Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing (this approach is a bit better imo): [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
+1) Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing: [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
 
 2) Install [SFDX CLI](https://developer.salesforce.com/tools/sfdxcli)
 
