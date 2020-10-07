@@ -7,13 +7,15 @@ _**Below are the documents to help setup useful things to make you life a little
 
 1. [Salesforce Best Practices Documentation](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/SF-Best-Practices-Documentation)
 
-2. [How to setup ApexDocs for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Install-ApexDocs)
+2. [How to setup a Salesforce VSCode Project](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-a-Salesforce-VSCode-Project-(Org-Development-Model))
 
-3. [How to setup local Git for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setting-up-and-using-local-Git-with-IntelliJ-Illuminated-Cloud-for-Salesforce)
+3. [How to setup ApexDocs for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Install-ApexDocs)
 
-4. [Setting up ESLint for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-ESLint-in-IntelliJ)
+4. [How to setup local Git for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setting-up-and-using-local-Git-with-IntelliJ-Illuminated-Cloud-for-Salesforce)
 
-5. [How to setup PMD for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-PMD-for-Apex-Code-in-IntelliJ)
+5. [Setting up ESLint for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-ESLint-in-IntelliJ)
+
+6. [How to setup PMD for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-PMD-for-Apex-Code-in-IntelliJ)
 
 
 
