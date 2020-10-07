@@ -2,16 +2,18 @@ Install/Setup guide for Jest:
 
 1) Download nodejs here: [Node JS Install](https://nodejs.org/en/download/) or use chocolately and nodist if you know what you're doing (this approach is a bit better imo): [NodeJS Nodist Install Instructions](https://github.com/nullivex/nodist)
 
-2) run this command in your project to install jest for lwc: sfdx [force:lightning:lwc:test:setup](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm)
+2) Install [SFDX CLI](https://developer.salesforce.com/tools/sfdxcli)
+
+3) Run this command in your project to install jest for lwc: sfdx [force:lightning:lwc:test:setup](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm)
 
         a) This command also adds the __tests__ folders to the .forceignore file which 
         makes sure its not synced to the server.
 
-3) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
+4) You may need to change your execution policy since jest doesn't register as a known Windows Package currently. Open powershell as an admin and enter the following command: Set-ExecutionPolicy Unrestricted
 
         a) When prompted, type the value A and then hit enter
 
-4) Create a folder inside your lightning web component (or Aura Component) folder called \_\_tests\_\_
+5) Create a folder inside your lightning web component (or Aura Component) folder called \_\_tests\_\_
 
         a) This can be automatically done by utilizing the sfdx force:lightning:lwc:test:create command
 
