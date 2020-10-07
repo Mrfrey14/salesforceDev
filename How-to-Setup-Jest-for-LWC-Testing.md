@@ -25,7 +25,15 @@ Install/Setup guide for Jest:
 
 7) Use the cli command sfdx force:lightning:lwc:test:run to run tests inside your \_\_tests\_\_ folders
 
-       a) Use the command sfdx force:lightning:lwc:test:run --watch to have jest automatically run tests when they get updated. 
+       a) Use the command sfdx force:lightning:lwc:test:run --watch to have jest 
+          automatically run tests when they get updated. 
+
+
+***
+
+
+
+Useful Links:
 
 [sfdx-lwc-jest repo here](https://github.com/salesforce/sfdx-lwc-jest)
 
