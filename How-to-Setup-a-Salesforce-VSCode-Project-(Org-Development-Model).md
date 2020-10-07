@@ -60,6 +60,14 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
+**Other Useful Features To Enable**
+
+1) In the extension settings under "Salesforce Apex Configuration" there is a checkbox for "Enable-sobject-refresh-on-startup". This automatically refreshes your sobjects from your org when your project is loaded.
+
+2) In the extension settings under "Salesforce Feature Previews" there is a checkbox for "Detect Conflicts At Sync". This enables conflict detection when deploying a save to your orgs. It can help to prevent overwriting data.
+
+***
+
 
 ### Supplementary links
 
