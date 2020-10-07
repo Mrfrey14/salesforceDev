@@ -21,8 +21,14 @@ Install/Setup guide for Jest:
 
 6) Create tests in the \_\_tests\_\_ folder and name them [fileYouAreTesting].test.js
 
-7) Use the cli command npm run test:unit to run tests inside your \_\_tests\_\_ folders
+        a) This can be automatically done by utilizing the sfdx force:lightning:lwc:test:create command
 
-       a) Use the command npm run test:unit:watch to have jest automatically run tests when they get updated. 
+7) Use the cli command sfdx force:lightning:lwc:test:run to run tests inside your \_\_tests\_\_ folders
 
-[More info on sfdx-lwc-jest here](https://github.com/salesforce/sfdx-lwc-jest)
+       a) Use the command sfdx force:lightning:lwc:test:run --watch to have jest automatically run tests when they get updated. 
+
+[sfdx-lwc-jest repo here](https://github.com/salesforce/sfdx-lwc-jest)
+
+[sfdx cli lwc command list](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_lightning.htm)
+
+[Salesforce Documentation on Writing Jest Tests](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.unit_testing_using_jest_patterns)
