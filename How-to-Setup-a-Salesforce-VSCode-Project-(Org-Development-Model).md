@@ -80,6 +80,28 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
+**How to do Execute Anonymous in VSCode**
+
+1) Locate the top level folder "scripts", then open its subfolder "apex"
+
+2) Create a new apex file in the "apex" folder and write your code in that file.
+
+3)  In the command palette run the SFDX: Execute Anonymous Apex With Editor Contents command
+
+
+***
+
+**How to do SOQL queries in VSCode**
+
+1) In the command palette run the SFDX: Execute SOQL Query command
+
+2) Choose whether it's a REST API or Tooling API Query (Most queries will use the REST API)
+
+3) Type your query and hit enter
+
+
+***
+
 
 ### Supplementary links
 
