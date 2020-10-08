@@ -5,6 +5,18 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
+**Things you need to install**
+
+1) Install [VSCode](https://code.visualstudio.com/download)
+
+2) Install the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
+
+3) Install the [Salesforce VSCode Extension Pack](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode)
+
+
+***
+
+
 **How to setup a project and connect your org**
 
 1) In the command palette run the SFDX: Create Project with Manifest command
