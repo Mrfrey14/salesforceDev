@@ -104,8 +104,15 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 **Useful VSCode and SFDX CLI Plugins for Salesforce Development**
 
-1) 
+1) [Salesforce Scanner CLI Plugin](https://forcedotcom.github.io/sfdx-scanner/en/scanner-commands/run/) - This plugin allows you to run PMD, ESLint and security scans on your code and output them to files in various formats. It's the most comprehensive code scanner to date that's completely free.
 
+2) [Salesforce LWC Dev Server CLI Plugin](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.get_started_local_dev_setup) - This is super useful and you don't need DevHub enabled to setup this local server despite what the documentation says. If you want a local server to test your lwc ideas, this really comes in handy.
+
+3) [Salesforce LWC Dev Mobile CLI Plugin](https://github.com/forcedotcom/lwc-dev-mobile) - This cli plugin allows you to demo your lwc's in an iOS emulator or an Android emulator (you need those emulators installed on your machine via XCode and Android Studio). Useful when demoing or testing mobile apps.
+
+4) [Prettier Code Formatter VSCode Plugin](https://developer.salesforce.com/tools/vscode/en/user-guide/prettier) - This allows you to auto-format your code however you'd like it. There is also an apex plugin for prettier which makes this whole setup a bit easier.
+
+5) There are like 10 more I'll list in here eventually.
 
 ***
 
