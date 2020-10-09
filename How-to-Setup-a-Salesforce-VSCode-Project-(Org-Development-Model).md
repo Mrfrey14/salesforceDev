@@ -102,6 +102,13 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
+**Useful VSCode and SFDX CLI Plugins for Salesforce Development**
+
+1) 
+
+
+***
+
 
 ### Supplementary links
 
