@@ -11,9 +11,9 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 2) Install the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
 
-3) Install the [Salesforce VSCode Extension Pack](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode)
+3) Install the [Salesforce VSCode Extension Pack](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode) in VSCode
 
-
+4) This next download step is optional, but Node.js will come in handy eventually: [Install node.js and npm](https://nodejs.org/en/download/)
 ***
 
 
