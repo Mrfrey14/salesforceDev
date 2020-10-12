@@ -13,7 +13,7 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 3) Install the [Salesforce VSCode Extension Pack](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode) in VSCode
 
-4) This next download step is optional, but Node.js will come in handy eventually: [Install node.js and npm](https://nodejs.org/en/download/)
+4) This download step is optional, but Node.js will come in handy eventually: [Install node.js and npm](https://nodejs.org/en/download/)
 ***
 
 
