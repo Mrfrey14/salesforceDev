@@ -43,6 +43,8 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 **How to retrieve data from your org using the [manifest package.xml file](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/manifest_samples.htm) (Old way)**
 
+_**Note:**_ there is a VSCode extension to simplify setting up your package.xml manifest files called [Salesforce Package.xml Generator](https://marketplace.visualstudio.com/items?itemName=VignaeshRamA.sfdx-package-xml-generator). It will make your life way easier.
+
 1) You should see a "manifest" folder in your project. Inside that folder there should be a file called "package.xml". You can either leave it alone or update the package.xml file to include more metadata types to pull from your org. When you retrieve data in the next step, you will only retrieve data types declared in your package.xml file. For more information please check out the supplementary links section of this wiki article
 
 2) In the command palette run the SFDX: Retrieve Source in Manifest from Org command. This should pull in all the metadata from your org that you outlined in your package.xml file.
