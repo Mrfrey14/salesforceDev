@@ -33,7 +33,7 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
-**How to retrieve data from your org using the [Org Browser](https://developer.salesforce.com/tools/vscode/en/user-guide/org-browser) (New way)**
+**How to retrieve data from your org using the [Org Browser](https://developer.salesforce.com/tools/vscode/en/user-guide/org-browser)**
 
 1) After connecting your org using the steps outlines above, click the cloud icon on the left side of the VSCode window. Clicking it should display a list of all the metadata types available to pull in your org.
 
@@ -41,7 +41,7 @@ _Note: Ctrl+Shift+P brings up the command palette in vscode. Remember it, you wi
 
 ***
 
-**How to retrieve data from your org using the [manifest package.xml file](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/manifest_samples.htm) (Old way)**
+**How to retrieve data from your org using the [manifest package.xml file](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/manifest_samples.htm)**
 
 _**Note:**_ There is a VSCode extension to simplify setting up your package.xml manifest files called [Salesforce Package.xml Generator](https://marketplace.visualstudio.com/items?itemName=VignaeshRamA.sfdx-package-xml-generator). It will make your life way easier.
 
