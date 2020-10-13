@@ -14,7 +14,9 @@ Article in progress...
 
 7) If you want to pull code or config from your scratch org into your local vscode project use the commnand: SFDX: Pull Source from Default Scratch Org
 
-7) If you want to open your scratch org use the command: SFDX: Open Default Org
+8) If you want to open your scratch org use the command: SFDX: Open Default Org
+
+Using this in tandem with unlocked packages can make your life a lot easier. You can install the necessary metadata in your scratch org just by installing an unlocked package in it. Alternatively, you can technically manage this all in your git repositories.
 
 
 
