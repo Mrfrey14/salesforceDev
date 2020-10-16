@@ -27,7 +27,7 @@
 
 6) Press Ctrl+S to save the settings file
 
-7) Press Ctrl+Shift+P to bring up the control palette and enter the following command: Uncrustify: Create Default Config. After running that command you should see an uncrustify.cfg file in your project
+7) Press Ctrl+Shift+P to bring up the control palette and enter the following command: Uncrustify: Create Default Config. After running that command you should see an uncrustify.cfg file in your project (or you can use the config file I like here: [Matt's Uncrustify Config](https://github.com/Coding-With-The-Force/SalesforceBestPractices/blob/master/uncrustify.cfg)
 
 8) Open the uncrustify.cfg file and update all your settings in it (This is just a nice UI with a ton of different options, so nothing complicated here). Make sure to hit the save button in the top right corner when you are done!
 
