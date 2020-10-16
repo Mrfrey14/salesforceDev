@@ -9,6 +9,8 @@ _**Below are the documents to help setup useful things to make you life a little
 
 2. [How to setup a Salesforce VSCode Project](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Setup-a-Salesforce-VSCode-Project-(Org-Development-Model))
 
+3. [How to setup Uncrustify for auto-formatting Apex and Javascript in Visual Studio Code ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setup-Uncrustify-Code-Formatting-for-Apex-and-Javascript-in-Visual-Studio-Code)
+
 3. [How to setup ApexDocs for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Install-ApexDocs)
 
 4. [How to setup local Git for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setting-up-and-using-local-Git-with-IntelliJ-Illuminated-Cloud-for-Salesforce)
