@@ -2,7 +2,7 @@
 
 1) Install [Chocolatey Package Manager](https://www.liquidweb.com/kb/how-to-install-chocolatey-on-windows/) or [NPM](https://nodejs.org/en/download/) 
 
-2) Install [Uncrustify](https://chocolatey.org/packages/uncrustify) by running windows powershell as an admin and entering the following command if using chocolatey package manager : `choco install uncrustify ` or `npm i uncrustify` if using npm
+2) Install [Uncrustify](https://chocolatey.org/packages/uncrustify) by running windows powershell as an admin and entering the following command if using chocolatey package manager : `choco install uncrustify ` or if you use npm run this command `npm i uncrustify`
 
 3) Install the [Uncrustify Visual Studio Code plugin](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.uncrustify)
 
