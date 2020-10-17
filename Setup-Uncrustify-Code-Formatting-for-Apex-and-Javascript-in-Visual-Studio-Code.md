@@ -1,8 +1,8 @@
 ### How to setup uncrustify for apex and javascript in visual studio code
 
-1) Install [Chocolatey Package Manager](https://www.liquidweb.com/kb/how-to-install-chocolatey-on-windows/)
+1) Install [Chocolatey Package Manager](https://www.liquidweb.com/kb/how-to-install-chocolatey-on-windows/) or [NPM](https://nodejs.org/en/download/) 
 
-2) Install [Uncrustify](https://chocolatey.org/packages/uncrustify) by running windows powershell as an admin and entering the following command: `choco install uncrustify `
+2) Install [Uncrustify](https://chocolatey.org/packages/uncrustify) by running windows powershell as an admin and entering the following command if using chocolatey package manager : `choco install uncrustify ` or `npm i uncrustify` if using npm
 
 3) Install the [Uncrustify Visual Studio Code plugin](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.uncrustify)
 
