@@ -11,6 +11,8 @@ _**Below are the documents to help setup useful things to make you life a little
 
 3. [How to setup Uncrustify for auto-formatting Apex and Javascript in Visual Studio Code ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setup-Uncrustify-Code-Formatting-for-Apex-and-Javascript-in-Visual-Studio-Code)
 
+4. [How to use the SFDX Scanner to perform automatic static code analysis on your code base](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-setup-the-SFDX-Scanner-CLI-Plugin-for-Static-Code-Analysis)
+
 3. [How to setup ApexDocs for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/How-to-Install-ApexDocs)
 
 4. [How to setup local Git for Salesforce in IntelliJ](https://github.com/Coding-With-The-Force/SalesforceBestPractices/wiki/Setting-up-and-using-local-Git-with-IntelliJ-Illuminated-Cloud-for-Salesforce)
