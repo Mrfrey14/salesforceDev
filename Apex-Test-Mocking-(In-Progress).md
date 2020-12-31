@@ -6,5 +6,5 @@ Notes:
 - Really only meant for Domain and Application layer tests
 - Speeds up testing significantly
 
-Easiest code to use IMO:https://github.com/surajp/universalmock
+Easiest library to use IMO: https://github.com/surajp/universalmock
 Also have good object data mocking classes here (originally built by Caleb Weaver): https://github.com/Coding-With-The-Force/SalesforceBestPractices/tree/master/MockDataBuilder
