@@ -2,9 +2,11 @@ Notes:
 
 - Can't test static methods at all
 - Methods need to be very modularized as it's borderline impossible to do good mocking with mega methods.
-- Service layer code should be tested for real (potentially using mocks for dependencies though) to make sure the user gets the expected results.
+- Service layer code should ideally still use integration testing without mocks (potentially using mocks for dependencies though) to make sure the user 
+  gets the expected results.
 - Really only meant for Domain and Application layer tests
 - Speeds up testing significantly
+- To use effectively you need to implement the DAO (Data Access Object) design pattern in your org
 
 Easiest library to use IMO: https://github.com/surajp/universalmock
 
