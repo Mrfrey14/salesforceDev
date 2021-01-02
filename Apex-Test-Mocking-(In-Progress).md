@@ -6,7 +6,7 @@ Notes:
   gets the expected results.
 - Really only meant for Domain and Application layer tests
 - Speeds up testing significantly
-- To use effectively you need to implement the DAO (Data Access Object) design pattern in your org
+- To use effectively (i.e. good DML mocking to speed up testing) you need to implement the DAO (Data Access Object) design pattern in your org
 
 Easiest library to use IMO: https://github.com/surajp/universalmock
 
