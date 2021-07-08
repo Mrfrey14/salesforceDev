@@ -21,7 +21,11 @@ All conventions outlined below apply to both apex and javascript. Please ensure 
 
 - Prefix classes with business unit specific logic with appropriate business unit namespaces: BusinessUnit_ClassName. to make it easier to identify code for a particular business unit.
 
-- Prefix classes that are to be utilized as utility classes org wide (without respect to any particular business unit) with the word Util: Util_ClassName. This makes it easier to identify utilities that can be leveraged by everyone working in the org and helps reduce code duplication.
+- Prefix classes that are to be utilized as utility classes org wide (without respect to any particular business unit) with the word Util: Util_ClassName. This makes it easier to identify utilities that can be leveraged by everyone working in the org and helps reduce code duplication. An example of a useful utility class is a class that holds common string values or picklist values in the org (ex: Util_Picklist_Values).
+
+- Prefix class that are abstract that could and should be used by any business unit with the word Org. A good example of an org wide class is a service that is a class that is abstract enough to be used for duplicate management on any object in the org (ex: Org_Duplicate_Management_Service).
+
+- Selector Layer classes (classes that house your queries in SF) should always be named ObjectName_Selector
 
 - Use camel case for class names. All words in a class name should be capitalized.
 
