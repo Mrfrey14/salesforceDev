@@ -8,14 +8,41 @@ I highly suggest you read the following books:
 
 [Salesforce Lightning Platform Enterprise Architecture - Third Edition](https://www.amazon.com/Salesforce-Lightning-Platform-Enterprise-Architecture/dp/1789956714)
 
+---
+
+<h1 align="center">
+Separation of Concerns
+</h1>
+
+This is arguably **THE MOST IMPORTANT THING YOU WILL DO IN YOUR ORG!!! DO NOT IGNORE THE NEED TO IMPLEMENT THIS!!!**. After working in over 20 orgs and making tons of mistakes writing code I can tell you from experience implementing Separation of Concerns (SoC) will absolutely change everything for you. If implemented properly it will massively reduce your codebase, make it considerably easier to make code updates on the fly without being terrified, make your code easier to read, make your code extremely abstract and flexible, unlock the wonders of lightning fast and extremely thorough unit testing among other things. Please please please, do not overlook this in your projects **EVER**!!! If you're like me, you will eventually regret that decision quite a bit and it will ruin a once decent place to be a dev.
+
+I have written an extremely in depth guide that includes video tutorials on how to implement this in Salesforce that [you can check out here](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki), however I will outline the basics below.
+
+---
+
+### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer" target="_blank">The Service Layer</a>
 
 
-<hr/>
+---
+
+
+### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer" target="_blank">The Domain Layer</a>  
+
+
+---
+
+
+### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/13)-The-Selector-Layer " target="_blank">The Selector Layer</a> 
+
+
+
+---
+
 <h1 align="center">
 Naming Conventions
 </h1>
 
-All conventions outlined below apply to both apex and javascript. Please ensure your javascript follows all these conventions as well.
+All conventions outlined below apply to both Apex and JavaScript. Please ensure your JavaScript follows all these conventions as well.
 
 ### _<u>Class file naming</u>_
 
@@ -25,11 +52,11 @@ All conventions outlined below apply to both apex and javascript. Please ensure 
 
 - Prefix class that are abstract that could and should be used by any business unit with the word Org. A good example of an org wide class is a service that is a class that is abstract enough to be used for duplicate management on any object in the org (ex: Org_Duplicate_Management_Service).
 
-- [Service Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer) classes should be named AreaOfOrg_Service. An example of "AreaOfOrg" is maybe a document generation app you've built for your organization, so the name of the service class would end up being `DocumentGeneration_Service`.  
+- <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer" target="_blank">Service Layer</a> classes should be named AreaOfOrg_Service. An example of "AreaOfOrg" is maybe a document generation app you've built for your organization, so the name of the service class would end up being `DocumentGeneration_Service`.  
 
-- [Domain Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer) classes (classes that house your object specific behavior and act as trigger handlers) should just be a plural name of the object it represents. For instance for the Contact object, your Domain class would just be `Contacts`.
+- <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer" target="_blank">Domain Layer</a>   classes (classes that house your object specific behavior and act as trigger handlers) should just be a plural name of the object it represents. For instance for the Contact object, your Domain class would just be `Contacts`.
 
-- [Selector Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/13)-The-Selector-Layer) classes (classes that house your queries in SF) should always be named `ObjectName_Selector`.
+- <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/13)-The-Selector-Layer " target="_blank">Selector Layer</a> classes (classes that house your queries in SF) should always be named `ObjectName_Selector`.
 
 - Use camel case for class names. All words in a class name should be capitalized.
 
