@@ -25,7 +25,11 @@ All conventions outlined below apply to both apex and javascript. Please ensure 
 
 - Prefix class that are abstract that could and should be used by any business unit with the word Org. A good example of an org wide class is a service that is a class that is abstract enough to be used for duplicate management on any object in the org (ex: Org_Duplicate_Management_Service).
 
-- Selector Layer classes (classes that house your queries in SF) should always be named ObjectName_Selector
+- [Service Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer) classes should be named AreaOfOrg_Service. An example of "AreaOfOrg" is maybe a document generation app you've built for your organization, so the name of the service class would end up being `DocumentGeneration_Service`.  
+
+- [Domain Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer) classes (classes that house your object specific behavior and act as trigger handlers) should just be a plural name of the object it represents. For instance for the Contact object, your Domain class would just be `Contacts`.
+
+- [Selector Layer](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/13)-The-Selector-Layer) classes (classes that house your queries in SF) should always be named `ObjectName_Selector`.
 
 - Use camel case for class names. All words in a class name should be capitalized.
 
@@ -33,22 +37,39 @@ All conventions outlined below apply to both apex and javascript. Please ensure 
 
 - Class names **MUST BE MEANINGFUL!** Please ensure the name of your class is relevant to the class and what its purpose is.
 
+Generic example of a class name with its corresponding test class name:
 ```
 BusinessUnit_MeaningfulClassName
 BusinessUnit_MeaningfulClassName_Test
 ```
+
+---
 
 ### _<u>Method naming conventions</u>_
 
 Methods should utilize camel case conventions. The first word in the method should be lower case, all other uppercase. Method names **MUST BE MEANINGFUL**. They must be named something relevant to the operation they are attempting to execute.
 
 ```java
-public void methodName(String acctName)
+public void operationBeingDone(List<String> acctNames)
 {
 
 }
 
 ```
+
+---
+
+### Method Parameter Types
+
+Aside from controller classes, which should have extremely narrow scope and hardly any code, your method parameters should encourage bulkification. What I mean by this is that your method parameters should be Lists, Sets or Maps. They should be collections and your code in your methods should operate in a bulkified manner. This is important for several reasons, the biggest reason however is that you never know what your code will need to do in the future or where/what it will be called by. Today it's only called by a random lightning component, but maybe tomorrow a trigger needs to use the same code or a batch class. Instead of re-writing the method over and over, just bulkify it once and use it everywhere.  
+
+Acceptable Example Methods:  
+```
+public static void calculateOpportunityProfits(List<Account> accountsToCalculate)
+public static void generateWordDocument(Map<String, SObject> sObjectByName)
+```
+
+---
 
 ### _<u>Variable naming conventions</u>_
 
