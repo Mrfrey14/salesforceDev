@@ -22,6 +22,10 @@ I have written an extremely in depth guide that includes video tutorials on how 
 
 ### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer" target="_blank">The Service Layer</a>
 
+The Service Layer in your org are a collection of apex classes that house your business logic for different areas of your Salesforce org. All the layers are important, but the service layer is the most critical to implement. Your business logic is something that will constantly change and the need for it to be used in your org will evolve over time. Something that was once only used in a controller will almost certainly eventually be used by something else like a trigger in the future. Therefore Service Layer classes and their methods should absolutely be bulkified unless you have an extremely exceptional circumstance. 
+
+It is critical to implement service classes for the different applications in your org for 
+
 
 ---
 
