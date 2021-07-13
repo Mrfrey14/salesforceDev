@@ -8,6 +8,8 @@ I highly suggest you read the following books:
 
 [Salesforce Lightning Platform Enterprise Architecture - Third Edition](https://www.amazon.com/Salesforce-Lightning-Platform-Enterprise-Architecture/dp/1789956714)
 
+DISCLAIMER: These are suggested best practices based on past experiences. You may find better options for your own org. These also may become outdated as technology advanced and while I try to update these as frequently as possible I make no promise they will be up to date. Please only use these as a frame of reference to potentially base your own best practice documentation on, it is still required you do your own research and learning to make sure these best practices fit your orgs needs. 
+
 ---
 
 <h1 align="center">
@@ -18,19 +20,32 @@ This is arguably **THE MOST IMPORTANT THING YOU WILL DO IN YOUR ORG!!! DO NOT IG
 
 I have written an extremely in depth guide that includes video tutorials on how to implement this in Salesforce that [you can check out here](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki), however I will outline the basics below.
 
+It is my personal opinion that the best and most complete library for implementing Separation of Concerns on the Salesforce Platform is the [Apex Common Library](https://github.com/apex-enterprise-patterns/fflib-apex-common). I have spent countless hours with a variety of libraries and none come close to the completeness of this library and none have comparable community support.
+
 ---
 
 ### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/07)-The-Service-Layer" target="_blank">The Service Layer</a>
 
 The Service Layer in your org are a collection of apex classes that house your business logic for different areas of your Salesforce org. All the layers are important, but the service layer is the most critical to implement. Your business logic is something that will constantly change and the need for it to be used in your org will evolve over time. Something that was once only used in a controller will almost certainly eventually be used by something else like a trigger in the future. Therefore Service Layer classes and their methods should absolutely be bulkified unless you have an extremely exceptional circumstance. 
 
-It is critical to implement service classes for the different applications in your org for 
+It is critical to implement service classes for the different applications in your org for the following reasons:
 
+1) It will drastically reduce the overall code in your system. If you don't create a bulkified service class to house your business logic, you will almost certainly, at one point or another, have to replicate that business logic somewhere else in your codebase. If you write it as a bulkified service, you won't. 
+
+2) It makes updating ever changing business process super easy. Smoooooooooth like butter. Since everything can connect to it and since there's only one place with that business logic, you don't have to go searching high and low through the code to find all the places you need to update the business logic. This is easily the most beneficial aspect of making a service layer... if you work in enough orgs you'll find that without one, business logic alterations (which are frequent) can kill you.
+
+3) If you structure your service classes for more abstract processes (like email sending) you can make them alter their logic at run time which will also drastically reduce code and force you to segment you service classes into extremely logic chunks (this is a confusing concept we'll cover more later, it's also not necessary to implement so don't get scared away by it).
+
+4) It will come in handy when we get into unit testing and mocking in general in the coming sections. Without these distinct layers, unit testing and mocking becomes impossible (this is a confusing concept we'll cover more later, it's also not necessary to implement so don't get scared away by it).
+
+As you can see, there are massive benefits to the service layer. It is the most critical layer to implement without a doubt, so if your codebase doesn't currently implement a service layer, I would start refactoring code to use a service layer first and worry about the Domain and Selector layers later (but don't forget about them!) 
 
 ---
 
 
-### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer" target="_blank">The Domain Layer</a>  
+### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer" target="_blank">The Domain Layer</a>
+
+Ahhh the Domain Layer, this one confuses people, but really it's just a fancy trigger handler (kinda). Domain layer classes should house object specific behavior. So they should absolutely house trigger logic/methods (after insert logic, before update logic, etc), but they should also house methods that aren't specific to trigger operations as well. The example I like to give here is the following: Many objects get tasks created for them in a variety of situations and for each object the way tasks are created is often different. You should put your task creation logic in your domain layer, since it's object specific logic. Then you service classes can call that object specific logic when necessary, your trigger logic can call it or wherever else in your code needs to use it.   
 
 
 ---
