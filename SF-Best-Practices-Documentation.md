@@ -302,10 +302,16 @@ Test Classes
 </h1>
 
 ### _<u>Test method best practices</u>_
-- Use testMethod modifier on test methods instead of @isTest above the method signature. It looks quite a bit cleaner.
-- Put the test setup method as the first method in the test class before all test methods. Also, always utilize @TestSetup methods for setting up test data.
-- Create a test method for every class method no matter what, even if one method will call to
-  another method and give you code coverage.
+- Use the @isTest decorator above each test method as opposed to the "testmethod" method declaration.
+- Put the test setup method as the first method in the test class before all test methods. Also, always utilize @TestSetup methods for setting up test data that will be used in at least 75% of all test methods. It's important to note, any limits you've accumulated in the test setup method will be brought over to your actual test methods. BE VERY WARY OF THAT LIMIT CARRY OVER!
+- Create a test method for each path your code could take in each method. This includes failure paths. 
+Example:
+```java
+public class ClassImTesting{
+    public void
+}
+```
+----Need to finish updating
 - Always ensure every test method uses at least one assertion to make sure we are not only
   getting code coverage but that our apex classes are returning the results we expect them to
   return.
