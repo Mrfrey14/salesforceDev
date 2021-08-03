@@ -302,21 +302,55 @@ Test Classes
 </h1>
 
 ### _<u>Test method best practices</u>_
+
+TEST CLASSES ARE ARGUABLY THE MOST IMPORTANT THINGS YOU WILL EVER DEVELOP! Yes, they're boring, no they aren't exciting, but they are your saving grace and they are how you ensure your code still works despite the 900 new additions to the code base in the last sprint. Do not skimp on test classes, do not treat them like garbage work you have to do. There will be a day, if you ignore your test classes, that your org will break in horrible ways and could result in absolutely terrible situations. Not only will test classes save you from yourself in the future, but they give you the freedom to refactor your code at will. If you hate your code or just know it could be improved, if you have test classes you trust all you need to do is update the code you want to change, re-run the tests and as long as the tests are still successful you can deploy your refactor without the terror of having broken something critical in your org. Make test classes your best friend plz.
+
+**_Test Class Basics_**
 - Use the @isTest decorator above each test method as opposed to the "testmethod" method declaration.
 - Put the test setup method as the first method in the test class before all test methods. Also, always utilize @TestSetup methods for setting up test data that will be used in at least 75% of all test methods. It's important to note, any limits you've accumulated in the test setup method will be brought over to your actual test methods. BE VERY WARY OF THAT LIMIT CARRY OVER!
 - Create a test method for each path your code could take in each method. This includes failure paths. 
 Example:
+Class being tested:
 ```java
 public class ClassImTesting{
-    public void
+    public List<Account> getAccounts(Id acctId){
+        if(acctId != null){
+            return [SELECT Id FROM Account WHERE Id = :acctId];
+        }
+        else{
+             return new List<Account>();
+        }
+    }
 }
 ```
-----Need to finish updating
+Class Testing the above class:
+```java
+@isTest
+public class ClassImTestimg_Test{
+    @isTest    
+    private static void getAccounts_nullAcctId_Test(){
+        Test.startTest();
+        List<Account> acctsReturned = new ClassImTesting().getAccounts(null);
+        Test.stopTest();
+        System.assertEquals(0, acctsReturned.size(), 'The code should have returned zero accounts in a null account id scenario');
+    }
+
+    @isTest    
+    private static void getAccounts_realAcctId_Test(){
+        Account acct = new Account(name='KewlAccount');
+        insert acct;
+        Test.startTest();
+        List<Account> acctsReturned = new ClassImTesting().getAccounts(acct.Id);
+        Test.stopTest();
+        System.assertEquals(1, acctsReturned.size(), 'The code should have returned one accounta in a real account id scenario');
+    } 
+}
+```
 - Always ensure every test method uses at least one assertion to make sure we are not only
   getting code coverage but that our apex classes are returning the results we expect them to
   return.
 - Make sure to test for both positive and negative scenarios in your test classes (scenarios that fail and scenarios that don't). 
-- Make sure to test bulk scenarios. Testing the creation of one contact in a contact trigger is not sufficient. Test how it handles a load of 10,000 contacts too.
+- Make sure to test bulk scenarios. Testing the creation of one contact in a contact trigger is not sufficient. Test how it handles a load of 1000 contacts too (bulk scenarios should be unit tested not integration tested which we'll cover later in this section).
 
 ```java
 //Test Class
@@ -349,7 +383,8 @@ List<User> rmdmUser = ObjectCreator.userCreator('MattyRMDM', 1, null, roleId);
     }
 }
 ```
-- Use the SetupData method to create test data, put it before test methods. Separate setup and non-setup object data to avoid mixed dml statement errors.
+
+**_Data Factories_**
 
 - Always use a data factory class to create test data, never build that in the class itself.
 
@@ -358,16 +393,24 @@ List<User> rmdmUser = ObjectCreator.userCreator('MattyRMDM', 1, null, roleId);
 TestDataFactory.createUsers() ...
 ```
 
-- Use start test and stop test. This will make sure that limits used by the data setup are not counted against the test. This resets and provides a separate set of limits for the test to use.
+**_Understanding Test.startTest and Test.stopTest_**  
+
+- Using Test.startTest and Test.stopTest will make sure that limits used by the data setup are not counted against the actual code you are trying to test. This resets and provides a separate set of limits for the test to use and for you to evaluate your test method against. It allows you to see how efficient or inefficient your methods are.
+
 ```java
 Test.startTest();
   //Some code goes here
 Test.stopTest();
 ```
 
-- Use assertions to verify the expected outcome has happened
+**_Why use Assertions?_**  
+
+- Use assertions to verify the expected outcome for the scenario your test method is testing actually happened. Without the use of assertions your test classes are effectively worthless. They prove nothing. You should strive to assert the outcome every path your code takes.
+
 ```java
 System.assertEquals(expected, actual);
+
+**_Unit Tests_**
 ```
 
 <hr/>
