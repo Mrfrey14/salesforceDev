@@ -409,9 +409,9 @@ Test.stopTest();
 
 ```java
 System.assertEquals(expected, actual);
+```
 
 **_Unit Tests_**
-```
 
 <hr/>
 
