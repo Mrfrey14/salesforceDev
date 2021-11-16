@@ -2,11 +2,12 @@ Written By: Matt Gerry
 
 This document will outline the standards and best practices I have found to be most useful throughout my time as a SF developer. These are in addition to the typical [Salesforce best practices.](https://developer.salesforce.com/blogs/developer-relations/2015/01/apex-best-practices-15-apex-commandments.html)
 
-I highly suggest you read the following books: 
+I highly suggest you read the following books to build a strong foundation as a developer on the platform: 
 
-[Advanced Apex Programming](https://www.amazon.com/Advanced-Apex-Programming-Salesforce-Appleman/dp/1936754126/ref=pd_sbs_14_1/134-8572035-4729812?_encoding=UTF8&pd_rd_i=1936754126&pd_rd_r=e091eb23-daa8-4013-9c17-a9c2678b783c&pd_rd_w=qma8j&pd_rd_wg=r0cF6&pf_rd_p=52b7592c-2dc9-4ac6-84d4-4bda6360045e&pf_rd_r=02MZS6R5D27AGW8EEC0T&psc=1&refRID=02MZS6R5D27AGW8EEC0T)
-
-[Salesforce Lightning Platform Enterprise Architecture - Third Edition](https://www.amazon.com/Salesforce-Lightning-Platform-Enterprise-Architecture/dp/1789956714)
+[Advanced Apex Programming](https://www.amazon.com/Advanced-Apex-Programming-Salesforce-Appleman/dp/1936754126/ref=pd_sbs_14_1/134-8572035-4729812?_encoding=UTF8&pd_rd_i=1936754126&pd_rd_r=e091eb23-daa8-4013-9c17-a9c2678b783c&pd_rd_w=qma8j&pd_rd_wg=r0cF6&pf_rd_p=52b7592c-2dc9-4ac6-84d4-4bda6360045e&pf_rd_r=02MZS6R5D27AGW8EEC0T&psc=1&refRID=02MZS6R5D27AGW8EEC0T)  
+[Salesforce Lightning Platform Enterprise Architecture - Third Edition](https://www.amazon.com/Salesforce-Lightning-Platform-Enterprise-Architecture/dp/1789956714)  
+[Clean Code](https://amzn.to/35PuMDU)  
+[Clean Architecture](https://amzn.to/35FYo6A)  
 
 DISCLAIMER: These are suggested best practices based on past experiences. You may find better options for your own org. These also may become outdated as technology advanced and while I try to update these as frequently as possible I make no promise they will be up to date. Please only use these as a frame of reference to potentially base your own best practice documentation on, it is still required you do your own research and learning to make sure these best practices fit your orgs needs. 
 
@@ -45,15 +46,39 @@ As you can see, there are massive benefits to the service layer. It is the most 
 
 ### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/10)-The-Domain-Layer" target="_blank">The Domain Layer</a>
 
-Ahhh the Domain Layer, this one confuses people, but really it's just a fancy trigger handler (kinda). Domain layer classes should house object specific behavior. So they should absolutely house trigger logic/methods (after insert logic, before update logic, etc), but they should also house methods that aren't specific to trigger operations as well. The example I like to give here is the following: Many objects get tasks created for them in a variety of situations and for each object the way tasks are created is often different. You should put your task creation logic in your domain layer, since it's object specific logic. Then you service classes can call that object specific logic when necessary, your trigger logic can call it or wherever else in your code needs to use it.   
+Ahhh the Domain Layer, this one confuses people, but really it's just a fancy trigger handler (kinda). Domain layer classes should house object specific behavior. So they should absolutely house trigger logic/methods (after insert logic, before update logic, etc), but they should also house methods that aren't specific to trigger operations as well. The example I like to give here is the following: Many objects get tasks created for them in a variety of situations and for each object the way tasks are created is often different. You should put your task creation logic in your domain layer, since it's object specific logic. Then your service classes can call that object specific logic when necessary, your trigger logic can call it or wherever else in your code needs to use it.   
 
+It's important to implement a Domain Layer in your codebase because it allows you to house the behavior of your object in a single place and use it everywhere you need it. This helps in the following ways:
+
+1) Any time you need to access object functionality you only need to access or update a single place in your code. Which makes it easier for devs to know where to write things and where to access special custom built functionality for an object.  
+
+2) It reduces code duplication. Many times I see developers write the exact same (or nearly identical) object specific custom logic in multiple apex controllers or batch classes. If they had just implemented a domain layer they could've accessed that code from all of those places and re-used it in all of those places.
+
+3) Implementing a Domain Layer helps you adhere to Salesforce's suggested best practice of using one and only one technology type (aka only using a trigger or a flow, not both). It encourages developers to put their object specific logic in your domain class and to not stray far away from it.
+
+4) Just like with all the other layers, the Domain class assists with mocking in your test classes. If you're tired of your deploys to production taking 230 minutes, this alone makes using a Domain layer very enticing. 
 
 ---
 
-
 ### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/13)-The-Selector-Layer " target="_blank">The Selector Layer</a> 
 
+The Selector Layer is a simple yet effective layer that not only drastically reduces code in your org, but it also helps to set and enforce security standards for the way data is queried in your codebase as well as set standards for the default fields queried and how the records are ordered. The goal of the selector layer is to have all of your queries for a single object be housed in a corresponding selector class, so for example, all of my queries for the Account object would be in the Account_Selector class. You might still be thinking, "But why should I waste my time on this though" and here are the answers:
 
+1) Many times throughout the lifecycle of an application the default fields that need to be queried for a good portion of your object queried change. If you have dozens (or hundreds) of places in your code where you've written the same inline query, this becomes a nightmare to change. You have to go update that everywhere and it's a pain. On the other hand, if you had just used a selector class you'd only ever update it in one place and you're good to go.
+
+2) Often times you use the exact same query multiple places, what if someday in the future that query isn't selective enough or it needs to select more fields, with a selector you can just update the query in one place and fix it everywhere, without it you have to update each query individually and hope you don't overlook one.
+
+3) Selectors enforce security standards for your codebase. You DO NOT want to be in an all too common situation where the same query in application one enforces FLS and CRUD and yet in another application and identical query doesn't do those things. It leads to confusion, data leaks and much more. Selectors help enforce these standards and force developers to choose when to shut off those security measures instead of just forgetting to use them now and then.
+
+4) Using Selectors gives you the option to mock your selector classes in tests which results in massive speed boosts for your test classes. Tired of it taking 2.5 hours to deploy, mocking is the key to getting some of your life back there.
+
+---
+
+### <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/05)-The-Unit-of-Work-Pattern" target="_blank">The Unit of Work Pattern</a> 
+
+You might be reading this right now and going, "Hey dawg, this isn't a layer, it's a pattern, why's it in here get rid of it you scrub", but just stick with me here. The Unit of Work (UOW) is very important and it should not be overlooked. It's almost its own layer, but not quite. A unit of work wraps all of your DML transactions you are making in your code into one beautiful bundle and executes all the inserts, updates, deletions, etc in one fell swoop. On top of that it sets security standards for your DML executions and it implements standardized save point rollbacks. This layer may be my personal favorite aside from the undeniable star of the show, the Service Layer, so let's find out why it's so incredibly useful:
+
+1)
 
 ---
 
