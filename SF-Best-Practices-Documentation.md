@@ -146,6 +146,13 @@ public static void calculateOpportunityProfits(List<Account> accountsToCalculate
 public static void generateWordDocument(Map<String, SObject> sObjectByName)
 ```
 
+If your method has more than three parameters being passed to it, you've likely made a mistake somewhere. One of several things has probably happened:
+
+1) Your method is way too big and needs to be broken into smaller methods.
+2) You need to create a wrapper object to hold all this data in memory instead of passing a bunch of variables
+
+More often than not #1 is your problem, but sometimes it actually can't be avoided. In these cases I would create a [wrapper class](https://youtu.be/PVZOKm6E82Q) to house my variables so they are easier to pass around.
+
 ---
 
 ### _<u>Variable naming conventions</u>_
@@ -166,7 +173,7 @@ Code Formatting
 All of the below applies to both apex and javascript.
 
 ### _<u>Brackets<u>_
-Always place brackets on their own lines, never place them on the same line. It allows the code to be more readable and for bracket related issues to be easily resolved in any IDE.
+While I'm personally a big fan of brackets on their own lines, I think it is more common and easier to read for most developers if brackets are placed inline. I would suggest all brackets being inline instead of on their own new line.
 
 Also, **PLEASE WRAP ALL IF STATEMENTS IN BRACKETS!** I know that this is not always necessary but from a readability and debugging stand point it makes things ten times easier. Please always use brackets for if statements.
 
@@ -174,20 +181,17 @@ Bracket Examples:
 
 ```java
 //Class brackets
-public class Brackets
-{
+public class Brackets{
   //Code here
 }
 
 //Method brackets
-public void insertAccounts(List<Account> accounts)
-{
+public void insertAccounts(List<Account> accounts){
   insert accounts;
 }
 
 //if statement, case blocks, etc. brackets
-if(needsABracket)
-{
+if(needsABracket){
 
 }
 ```
@@ -203,25 +207,20 @@ Boolean shouldBeChecked = null;
 
 //If else example.
 //More lines, but very readable
-if(checkIt == 'yea')
-{
+if(checkIt == 'yea'){
    shouldBeChecked = true;
 }
-else
-{
+else{
     shouldBeChecked = false;
 }
 
 //Switch statement example
 //Readable but less intuitive in my opinion.
-switch on checkIt
-{
-    when 'yea'
-    {
+switch on checkIt{
+    when 'yea'{
         shouldBeChecked = true;
     }
-    else
-    {
+    else{
         shouldBeChecked = false;
     }
 }
@@ -263,7 +262,7 @@ At the top of each class create a comment block that notes the developer name (y
 ```
 
 - ### _Method comments_
-Above every method there should be a description as to what it does and how it is utilized. It should also contain useful comments about the method. Comments should inform the developers as to why something was coded the way it was and the business justifications for it.
+Ideally methods should be so small and intuitive that method comments are really not necessary, however, if a method is not small and it is very confusing, there should be a description as to what it does and how it is utilized. It should also contain useful comments about the method. Comments should inform the developers as to why something was coded the way it was and the business justifications for it.
 
 ```java
 /**
@@ -273,8 +272,7 @@ Above every method there should be a description as to what it does and how it i
  * @example
  * Boolean exampleBoolean = ExampleClass.exampleMethod('exampleString');
  */
-public static Boolean exampleMethod(String exampleVariable)
-{
+public static Boolean exampleMethod(String exampleVariable){
     //Logic and code comments to help understand the business reasoning behind the development
     //choices that were made.
 }
@@ -386,19 +384,16 @@ public class ClassImTestimg_Test{
 ```java
 //Test Class
 @isTest
-public class ExampleClass_Test
-{
+public class ExampleClass_Test{
     @TestSetup
-    public static void setupData()
-    {
+    public static void setupData(){
         //setup all data that you will need in multiple test methods here
         //The test setup method has its own set of dml limits and will not affect the dml limits
         //of the other methods. Always utilize the object creator for test classes.
-List<User> rmdmUser = ObjectCreator.userCreator('MattyRMDM', 1, null, roleId);
+        List<User> rmdmUser = ObjectCreator.userCreator('MattyRMDM', 1, null, roleId);
     }
 
-    public static testMethod void methodOne_ValidScenario_Test()
-    {
+    public static testMethod void methodOne_ValidScenario_Test(){
         //This test method tests a valid scenario for the method named "Method One" in our
         //"ExampleClass" apex class.
         //All data setup should happen first in this method by utilizing the object creator class
