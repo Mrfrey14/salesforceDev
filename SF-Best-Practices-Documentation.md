@@ -78,7 +78,13 @@ The Selector Layer is a simple yet effective layer that not only drastically red
 
 You might be reading this right now and going, "Hey dawg, this isn't a layer, it's a pattern, why's it in here get rid of it you scrub", but just stick with me here. The Unit of Work (UOW) is very important and it should not be overlooked. It's almost its own layer, but not quite. A unit of work wraps all of your DML transactions you are making in your code into one beautiful bundle and executes all the inserts, updates, deletions, etc in one fell swoop. On top of that it sets security standards for your DML executions and it implements standardized save point rollbacks. This layer may be my personal favorite aside from the undeniable star of the show, the Service Layer, so let's find out why it's so incredibly useful:
 
-1)
+1) You can easily enforce security standards for your DML operations. If you want to make sure some one has the correct CRUD access on the object or FLS prior to doing a DML operation, by using a unit of work you can easily ensure that happens everywhere. Often times in a code base you can see that this varies from class to class. One class does check for FLS and CRUD, another only checks for CRUD and yet another class does no security checks at all. This is kinda awful and using a unit of work makes this easy to avoid.
+
+2) You can standardize error logging for your DML operations. This is also another area of DML operations that often varies greatly throughout your code. By using a unit of work you can ensure every failure in your DML gets logged in the same way!
+
+3) You can make sure your savepoint rollbacks are consistent and rollback all data in a transaction. Many times when you are inserting and/or updating multiple records across a variety of objects it is in your best interest to rollback your saves if any of those records fail to make their way to the database. This is unfortunately often overlooked, leading to tons of orphaned duplicate records throughout the system. Using a unit of work can completely eliminate this problem by just incorporating rollbacks during the transactions.
+
+4) It also allows you the ability to mock DML transactions in test classes. DML transactions interact with the database and database transactions are easily the longest running transactions in your code. By using a unit of work you can mock these transactions in your test classes which will greatly increase your test class speeds. 
 
 ---
 
