@@ -437,9 +437,23 @@ Test.stopTest();
 System.assertEquals(expected, actual);
 ```
 
-**_Unit Tests_**
+**_[Unit Tests](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests)_**
 
 <hr/>
+
+Unit tests, unit tests, unit tests an overlooked magical unicorn in the world of Salesforce... let me ask you a question? Are often irritated your test classes take forever when you're trying to deploy to production? Does it take 30+ minutes just to deploy? Then let me introduce unit tests! When you're writing tests you often have to make a trade off, would you like your tests to run fast? Or would you like it to cover literally every scenario your code could get into? Unit tests solve this problem because you can have hyper focused tests that test every outcome your methods could theoretically have but still be lightning fast.
+
+I understand some projects run out of time/are short on time and tests are often put on the backburner, but it is my opinion that you should ALWAYS WRITE UNIT TESTS!! Integration tests (the normal tests you're used to writing in SF are integration tests) are great and still necessary to some extent, but unit tests are what you should strive to deliver as a developer, because these tests show you if your methods really work the way you believe they work and they are fast, up to 20x faster, in my personal testing, than an integration test. 
+
+My personal favorite and suggested unit testing/mocking library of choice is Apex Mocks, but there are many others out there that you could leverage.
+
+If you have no idea what unit tests are, no worries fam, I've got you covered. Check out the links below for documentation, examples and much more:
+
+[Difference Between Unit Tests and Integration Tests](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests)
+
+[Unit Test Mocking with SoC](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/16)-Unit-Test-Mocks-with-Separation-of-Concerns)  
+
+[Implementing Unit Tests with Apex Mocks](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/17)-Implementing-Mock-Unit-Tests-with-the-Apex-Mocks-Library)
 
 <h1 align="center">
 Triggers</h1>
