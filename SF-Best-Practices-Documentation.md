@@ -499,6 +499,7 @@ To prevent flows, workflows and process builders from recursively firing a trigg
 Automation Processes
 </h1>
 <br/>
+
 ---
 
 <h1 align="center">
@@ -506,7 +507,21 @@ Flows
 </h1>
 <br/>
 
+Flows flows flows, they're powerful, but unbelievable dangerous if not in check, that said you can say the same about code. You've gotta wrangle it in and put lots of rules around it or both code and flows become nightmarish hellscapes. That said, flows have have a couple caveats that code doesn't have (pending you don't supplement your flows with lots of custom code); they don't scale well due to limits, even bulkified flows aren't quite what I'd call bulkified and there are severe limits to UI customization with flows which often come back to crush you. 
 
+So here's the deal, here are my personal rules for flows:
+
+1) If you are a startup/small company with a low budget, you should flow all day and you should thank god they exist (for now) because they reduce budget and time to market substantially. Also a tech savvy startup owner could easily build these themselves and save a lot of money.  
+
+2) If you are an organization that never intends to have more than ~500 users in your org and no objects/tables your flows operates on will likely have more than 10-20k records, you can consider using flows, but be weary if you scale they will likely come back to bite you eventually.  
+
+3) If you are a large org 500+ users, millions or billions of records, you should basically never use flows unless they are heavily augmented with code. Here are the situations I believe flows are useful in for large orgs:   
+  * You have a really really simple UI that does not require any really custom css, etc. These happen occasionally and screen flows should be leveraged here when possible. But I'm talkin really simple, like basically no decision points kinda simple.  
+  * When you have a massive multi-page LWC. It is beneficial to design your LWC to have flows manage the pagination of the LWC's. It can substantially reduce your overall code and need for future customization.  
+  * When you have email automations you need to get done, flows are typically the best way. Apex can do this but auto-launched and record-triggered flows do this fine and I can't complain here. Email = flow all day.  
+  * You can consider using record-triggered flows when you have low volume on an object... but I would be hesitant and really think about this. You already have a large object, it could scale and get away from you and changing a flow to a trigger is awful. I've done it many times and it hurts.  
+    
+Those are my rules personally. Flows are awesome when you're small and potentially a nightmare if used improperly when you're large.
 
 ---
 
