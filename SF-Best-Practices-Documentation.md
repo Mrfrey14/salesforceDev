@@ -437,7 +437,7 @@ Test.stopTest();
 System.assertEquals(expected, actual);
 ```
 
-**_[Unit Tests](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests)_**
+**_<a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests" target="_blank">Unit Tests</a>_**
 
 <hr/>
 
@@ -449,11 +449,18 @@ My personal favorite and suggested unit testing/mocking library of choice is Ape
 
 If you have no idea what unit tests are, no worries fam, I've got you covered. Check out the links below for documentation, examples and much more:
 
-[Difference Between Unit Tests and Integration Tests](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests)
+<a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/15)-The-Difference-Between-Unit-Tests-and-Integration-Tests" target="_blank">The Difference Between Unit Tests and Integration Tests</a>
+<a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/16)-Unit-Test-Mocks-with-Separation-of-Concerns" target="_blank">Unit Testing and Separation of Concerns</a>  
+<a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/17)-Implementing-Mock-Unit-Tests-with-the-Apex-Mocks-Library" target="_blank">Implementing Unit Testing with Apex Mocks</a>
 
-[Unit Test Mocking with SoC](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/16)-Unit-Test-Mocks-with-Separation-of-Concerns)  
 
-[Implementing Unit Tests with Apex Mocks](https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/17)-Implementing-Mock-Unit-Tests-with-the-Apex-Mocks-Library)
+---
+
+**_What Should The Mix of Integration and Unit Tests Be?_**
+
+In my personal opinion they should be about 75/25. Typically 75% of your tests should be unit tests (in an ideal world) and about 25% should be integration tests. The reason for this is, integration tests really only need to test the paths where an integration could take place once. So if class A calls Class B (Class A calling Class B is the integration here, we're not talking about integrating with external systems) when Field C is true then we only need to test that positive scenario in the integration test. Alternatively, the unit tests should test every theoretical path your code can take. It should test what happens when Field C is false, what happens when Field C is null, it should test your error handling, etc, etc, etc. There are easily triple the scenarios to test for unit tests typically.
+
+---
 
 <h1 align="center">
 Triggers</h1>
@@ -461,7 +468,9 @@ Triggers</h1>
 
 Triggers should never house any real logic. Their logic should reside in handler classes. This allows us to better handle issues with logic and identify where a problem resides.
 
-I suggest utilizing the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework). It's super light weight and more than enough for the vast majority of orgs.
+I suggest utilizing the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework). It's super light weight and more than enough for the vast majority of orgs. That said, if you have a larger org (more than 500 or so users), your org will likely expand to a larger org or you are working for an ISV (managed package providers), you should use something more robust. My suggestion here is to leverage the Apex Common Library to create Domain Layers for your objects. More info on that here: <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/11)-Implementing-The-Domain-Layer--with-the-Apex-Common-Library" target="_blank">Implementing the Domain Layer with the Apex Common Library</a>   
+
+If you have no idea what a trigger handler class is or what a trigger framework is, check out the video I made covering the topic using the framework mentioned above: [How to Implement a Trigger Framework](https://youtu.be/nmwX0djwG_4)
 
 **_THERE SHOULD NEVER BE MORE THAN ONE TRIGGER PER OBJECT!!!!_**
 
@@ -470,7 +479,7 @@ I suggest utilizing the [sfdc-trigger-framework](https://github.com/kevinohara80
 Triggers operate in the following way.
 1. They run Before operations, then after operations. Before and after operations occur within the same context.
 2. They always operate in chunks of 200 records. So if you send in a batch of 1000 contact updates at the same time, the trigger will fire 5 times. It fires once for every 200 records. This all occurs within the same context.
-3. Triggers are re-invoked on record update or record insert actions from flows, workflows and process builders. For this reason it is not ideal to have combined execution types. Either use triggers, flows, workflows or process builders. Combining them can really slow things down and is detrimental in larger orgs. If you do combine them, make sure nothing requires trigger recursion and build mechanisms to shut off the triggers when another process updates or inserts a record.
+3. Triggers are re-invoked on record update or record insert actions from flows, workflows and process builders. For this reason it is not ideal to have combined automation types. Either use triggers, flows, workflows or process builders. Combining them can really slow things down and is detrimental in larger orgs. If you do combine them, make sure nothing requires trigger recursion and build mechanisms to shut off the triggers when another process updates or inserts a record.
 
 Please reference the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework) documentation to see how to appropriately structure your triggers and their handler classes.
 
@@ -482,19 +491,33 @@ That being said there are lots of things that can cause a trigger to re-fire suc
 
 To prevent workflows and process builders from recursively firing a trigger we should always implement a way to prevent the recursion from taking place. With the [sfdc-trigger-framework](https://github.com/kevinohara80/sfdc-trigger-framework) you can utilize the bypass method to bypass your trigger when appropriate. 
 
-In the event you have a process builder or workflow on an object that is causing trigger recursion use the apex utility classes provided on this github page to bypass the trigger execution.
+To prevent flows, workflows and process builders from recursively firing a trigger/domain layer in the Apex Common Library (for larger orgs) check out the documentation on how to do so <a href="https://github.com/Coding-With-The-Force/Salesforce-Separation-Of-Concerns-And-The-Apex-Common-Library/wiki/11)-Implementing-The-Domain-Layer--with-the-Apex-Common-Library" target="_blank">here</a> and use invokable apex to turn them off at the start of your flow and re-enable them at the end of your flow.
+
+---
+
+<h1 align="center">
+Automation Processes
+</h1>
+<br/>
+---
+
+<h1 align="center">
+Flows
+</h1>
+<br/>
 
 
-### _<u>Trigger Switches</u>_
- - Needs to be updated.
-<br/>
-<hr/>
-<br/>
+
+---
 
 <h1 align="center">
 Process Builders
 </h1>
 <br/>
+
+_**DO NOT USE PROCESS BUILDERS! THEY WILL SOON BE DEPRECATED!!!!!**_
+
+However in the event you refuse to take the above advice, the below guidelines should be followed.
 
 Process builders are much like triggers in that there should typically only ever be one of them, however on occasion there can be a maximum of two per object. _**DO NOT MAKE MORE THAN ONE PROCESS BUILDER FOR EACH OF THE TWO TYPES LISTED BELOW!**_ Having more than one for either type can cause unexpected consequences. Build supplemental process builder logic into an existing process builder.
 
@@ -516,17 +539,15 @@ The second and most common type of process builder is a process builder that ope
 ### _<u>Terminating a Process Builder</u>_
 In the event you would like entry criteria for a process builder to terminate all actions the process builder may take without taking any action on any records, please utilize the **_Process_Builder_Terminator_** apex class. Use an apex callout to call the Process_Builder_Terminator to end your process builder without doing anything at all.
 
-### _<u>Process Builder Switches</u>_
- - Needs to be updated
-
-<hr/>
+---
 
 <h1 align="center">
 Workflow Rules
 </h1>
 
-Aside from time based event firing, there is really no need to utilize these much anymore. Anything they are capable of can typically be achieved within a process builder or a process builder combined with a flow or an apex class. **IF A PROCESS BUILDER CAN DO IT, USE A PROCESS BUILDER PLEASE.**
+_**DO NOT USE WORKFLOW RULES! THEY WILL SOON BE DEPRECATED!!!!!**_
 
+Don't use them, thanks, lol.
 <br/>
 
 <hr/>
