@@ -320,7 +320,7 @@ HTML formatting should be done in a similar format to how apex indentation is do
 
 ### _<u>CSS<u>_
 
-- CSS should always be housed in its own stylesheet file and referenced in the vf page or Aura component or LWC.
+- CSS should always be housed in its own stylesheet file (this can be the Aura or LWC stylesheet) and referenced in the vf page or Aura component or LWC.
 
 - CSS should never be inline or written directly into the page (except for in exceptionally rare circumstances relating to visualforce to pdf rendering).
 
