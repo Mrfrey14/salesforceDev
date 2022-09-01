@@ -314,7 +314,7 @@ HTML formatting should be done in a similar format to how apex indentation is do
 
 ### _<u>Javascript<u>_
 
-- If the javascript is not contained in an Aura Component or an LWC, Javascript should be housed in its own static resource file and added to the code via a script tag.
+- If the javascript is not contained in an Aura Component or an LWC (for instance a third party JS library), Javascript should be housed in its own static resource file and added to the code via a script tag or imported appropriately in an LWC or Aura component.
 
 - Javascript should be formatted and commented using the exact same standards as outlined above for apex.
 
