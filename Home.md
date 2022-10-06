@@ -1,5 +1,6 @@
-_**Welcome to the SalesforceBestPractices wiki!**_  
-_**Below are the documents to help setup useful things to make you life a little better as a developer.**_  
+_**Welcome to the Salesforce Best Practices wiki!**_  
+
+Below are the documents to help setup useful things to make you life a little better as a developer.  
 
 If you enjoy this wiki and would like to say thank you, feel free to [send a donation here](https://www.paypal.com/donate?business=RNHEF8ZWKKLDG&currency_code=USD)! But no pressure, I really just do this for fun!
 
